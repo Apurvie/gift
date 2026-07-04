@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Happy Birthday, Tash!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --hero-red: #C6110B;
+    --hero-red-dark: #8C0A06;
+    --void: #0A0B10;
+    --panel-cream: #F2E6C9;
+    --arc-gold: #E8B93D;
+    --arc-cyan: #6FE3E0;
+    --ink: #12131A;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    background: var(--void);
+    color: var(--panel-cream);
+    font-family:'Poppins', sans-serif;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ---------- Background: starfield + halftone ---------- */
+  .stars{
+    position: fixed;
+    inset:0;
+    z-index:0;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20% 30%, rgba(255,255,255,.5) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 70% 20%, rgba(255,255,255,.4) 50%, transparent 51%),
+      radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,.35) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,.3) 50%, transparent 51%),
+      radial-gradient(1px 1px at 10% 85%, rgba(255,255,255,.4) 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 55% 45%, rgba(255,255,255,.25) 50%, transparent 51%),
+      radial-gradient(1px 1px at 92% 90%, rgba(255,255,255,.3) 50%, transparent 51%);
+    background-repeat: repeat;
+    background-size: 300px 300px;
+    opacity:.8;
+  }
+
+  .halftone-strip{
+    position:absolute;
+    left:0; right:0;
+    height: 60px;
+    background-image: radial-gradient(circle, rgba(230,185,61,.35) 1.6px, transparent 1.7px);
+    background-size: 14px 14px;
+    pointer-events:none;
+  }
+
+  /* ---------- Layout wrapper ---------- */
+  .stage{
+    position:relative;
+    z-index:1;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:flex-start;
+    padding: 8vh 5vw 10vh;
+    text-align:center;
+  }
+
+  /* ---------- HERO ---------- */
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    letter-spacing: 3px;
+    font-size: 0.68rem;
+    color: var(--arc-cyan);
+    border: 1px solid rgba(111,227,224,.4);
+    padding: 5px 12px;
+    border-radius: 3px;
+    background: rgba(111,227,224,.06);
+    margin-bottom: 22px;
+    text-transform: uppercase;
+  }
+
+  .burst-wrap{
+    position:relative;
+    width:100%;
+    max-width: 480px;
+    margin-bottom: 6px;
+  }
+
+  .burst{
+    position:absolute;
+    top:50%; left:50%;
+    width: 145%;
+    height: auto;
+    transform: translate(-50%,-50%) rotate(0deg);
+    z-index:-1;
+    opacity:.95;
+    animation: burstPulse 3.5s ease-in-out infinite;
+  }
+
+  @keyframes burstPulse{
+    0%,100%{ transform: translate(-50%,-50%) rotate(0deg) scale(1); }
+    50%{ transform: translate(-50%,-50%) rotate(2deg) scale(1.035); }
+  }
+
+  h1.title{
+    font-family:'Bangers', cursive;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 12vw, 4.4rem);
+    line-height: 0.95;
+    letter-spacing: 1.5px;
+    color: var(--panel-cream);
+    -webkit-text-stroke: 2px var(--ink);
+    text-shadow:
+      3px 3px 0 var(--ink),
+      6px 6px 0 var(--hero-red-dark);
+    margin: 0;
+    padding: 30px 10px;
+    transform: rotate(-2deg);
+  }
+
+  .subtitle{
+    font-family:'Space Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--arc-gold);
+    letter-spacing: 1px;
+    margin-top: 4px;
+    margin-bottom: 40px;
+  }
+
+  /* ---------- ARC REACTOR BUTTON (signature element) ---------- */
+  .reactor-zone{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 18px;
+    margin: 10px 0 8px;
+  }
+
+  .reactor{
+    position:relative;
+    width: 150px;
+    height: 150px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 50% 50%, #dff7f6 0%, var(--arc-cyan) 28%, #1b7f7c 55%, #0c2a2a 78%, transparent 80%);
+    border: none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:
+      0 0 25px 6px rgba(111,227,224,.55),
+      0 0 60px 20px rgba(111,227,224,.25),
+      inset 0 0 20px rgba(255,255,255,.4);
+    animation: reactorBreathe 2.6s ease-in-out infinite;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  @keyframes reactorBreathe{
+    0%,100%{ box-shadow: 0 0 25px 6px rgba(111,227,224,.55), 0 0 60px 20px rgba(111,227,224,.22), inset 0 0 20px rgba(255,255,255,.4); }
+    50%{ box-shadow: 0 0 34px 10px rgba(111,227,224,.75), 0 0 80px 28px rgba(111,227,224,.32), inset 0 0 26px rgba(255,255,255,.55); }
+  }
+
+  .reactor::before{
+    content:"";
+    position:absolute;
+    width: 62%;
+    height: 62%;
+    border-radius:50%;
+    border: 3px solid rgba(10,20,25,.55);
+    box-shadow: inset 0 0 12px rgba(0,0,0,.4);
+  }
+
+  .reactor::after{
+    content:"";
+    position:absolute;
+    width: 38%;
+    height: 38%;
+    border-radius:50%;
+    background: repeating-conic-gradient(rgba(10,20,25,.55) 0deg 20deg, transparent 20deg 60deg);
+  }
+
+  .reactor:active{
+    transform: scale(0.94);
+  }
+
+  .reactor-label{
+    font-family:'Space Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 2.5px;
+    color: rgba(242,230,201,.65);
+    text-transform: uppercase;
+  }
+
+  .reactor.opened{
+    animation: none;
+    box-shadow:
+      0 0 45px 14px rgba(111,227,224,.85),
+      0 0 100px 40px rgba(111,227,224,.4),
+      inset 0 0 26px rgba(255,255,255,.6);
+  }
+
+  /* ---------- FILE PANEL (message) ---------- */
+  .file-panel{
+    max-width: 560px;
+    width:100%;
+    margin-top: 34px;
+    background: var(--panel-cream);
+    color: var(--ink);
+    border-radius: 6px;
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--hero-red);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(14px);
+    transition: opacity .7s ease, transform .7s ease, max-height .9s ease, margin .7s ease;
+  }
+
+  .file-panel.visible{
+    opacity: 1;
+    max-height: 2200px;
+    transform: translateY(0);
+  }
+
+  .file-panel-inner{
+    padding: 26px 22px 30px;
+    text-align:left;
+  }
+
+  .file-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-family:'Space Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 1px;
+    color: var(--hero-red-dark);
+    border-bottom: 2px dashed rgba(18,19,26,.25);
+    padding-bottom: 10px;
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .stamp{
+    font-family:'Bangers', cursive;
+    font-size: 1rem;
+    color: var(--hero-red);
+    border: 2px solid var(--hero-red);
+    border-radius: 4px;
+    padding: 2px 8px;
+    transform: rotate(-6deg);
+    opacity: .85;
+  }
+
+  .message-heading{
+    font-family:'Bangers', cursive;
+    font-size: 1.8rem;
+    color: var(--hero-red-dark);
+    letter-spacing: 1px;
+    margin: 0 0 14px;
+    transform: rotate(-1deg);
+  }
+
+  .message-body p{
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0 0 16px;
+    font-family:'Poppins', sans-serif;
+  }
+
+  .message-body strong{
+    color: var(--hero-red-dark);
+  }
+
+  .sign-off{
+    margin-top: 24px;
+    display:flex;
+    justify-content:flex-end;
+  }
+
+  .sign-off span{
+    font-family:'Bangers', cursive;
+    font-size: 1.6rem;
+    color: var(--ink);
+    transform: rotate(-4deg);
+    display:inline-block;
+    border-bottom: 3px solid var(--hero-red);
+    padding: 0 6px 2px;
+  }
+
+  .shield-row{
+    display:flex;
+    justify-content:center;
+    gap: 14px;
+    margin-top: 34px;
+  }
+
+  .shield{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #fff 0 14%, var(--hero-red) 15% 34%, #fff 35% 40%, var(--hero-red) 41% 60%, #143d8f 61% 100%);
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+    opacity:.85;
+  }
+
+  .footer-note{
+    margin-top: 30px;
+    font-family:'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1.5px;
+    color: rgba(242,230,201,.4);
+    text-transform: uppercase;
+  }
+
+  /* ---------- Confetti canvas ---------- */
+  #confetti-canvas{
+    position: fixed;
+    inset:0;
+    pointer-events:none;
+    z-index: 5;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .reactor, .burst{ animation: none !important; }
+    .file-panel{ transition: none; }
+  }
+
+  @media (max-width: 380px){
+    .reactor{ width: 130px; height: 130px; }
+    .file-panel-inner{ padding: 20px 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<div class="stage">
+
+  <div class="eyebrow">S.H.I.E.L.D. // CLASSIFIED TRANSMISSION</div>
+
+  <div class="burst-wrap">
+    <svg class="burst" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="100,0 115,70 180,40 130,95 200,100 130,105 180,160 115,130 100,200 85,130 20,160 70,105 0,100 70,95 20,40 85,70"
+        fill="#C6110B" stroke="#12131A" stroke-width="4"/>
+    </svg>
+    <h1 class="title">HAPPY<br>BIRTHDAY<br>TASH!!</h1>
+  </div>
+
+  <div class="subtitle">// ASSEMBLE THE MESSAGE BELOW //</div>
+
+  <div class="reactor-zone">
+    <button class="reactor" id="reactorBtn" aria-label="Activate arc reactor to reveal message"></button>
+    <div class="reactor-label" id="reactorLabel">Tap to activate</div>
+  </div>
+
+  <div class="file-panel" id="filePanel">
+    <div class="file-panel-inner">
+      <div class="file-header">
+        <span>File No. 07-04 &mdash; Priority: Heart</span>
+        <span class="stamp">Opened</span>
+      </div>
+
+      <h2 class="message-heading">A message from Arru</h2>
+
+      <div class="message-body">
+        <p><strong>Happy birthday Tash!!</strong> I'm so so sorry for forgetting your birthday, and I hope this makes up for it &mdash; ik it doesn't excuse the fact that I forgot, I truly apologise.</p>
+        <p>Anyways, I hope you know that you are a wonderful person and I look up to you a lot of times. Thanks for always being there for me and dealing with my bs.</p>
+        <p>I love you and I hope you have a wonderful year ahead.</p>
+        <p>Sending you lots of love.</p>
+      </div>
+
+      <div class="sign-off"><span>&mdash; arru</span></div>
+    </div>
+  </div>
+
+  <div class="shield-row" aria-hidden="true">
+    <div class="shield"></div>
+    <div class="shield"></div>
+    <div class="shield"></div>
+  </div>
+
+  <div class="footer-note">Made with love, not radiation. Mostly.</div>
+
+</div>
+
+<script>
+  const reactorBtn = document.getElementById('reactorBtn');
+  const reactorLabel = document.getElementById('reactorLabel');
+  const filePanel = document.getElementById('filePanel');
+  let opened = false;
+
+  reactorBtn.addEventListener('click', () => {
+    if (opened) return;
+    opened = true;
+    reactorBtn.classList.add('opened');
+    reactorLabel.textContent = 'Message unlocked';
+    filePanel.classList.add('visible');
+    filePanel.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+    launchConfetti();
+  });
+
+  // ---------- Lightweight confetti burst ----------
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animId = null;
+
+  function resizeCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resizeCanvas);
+  resizeCanvas();
+
+  const colors = ['#C6110B', '#E8B93D', '#6FE3E0', '#F2E6C9', '#143d8f'];
+
+  function launchConfetti(){
+    const count = window.innerWidth < 480 ? 70 : 120;
+    const originX = window.innerWidth / 2;
+    const originY = window.innerHeight * 0.35;
+
+    for (let i = 0; i < count; i++){
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 3 + Math.random() * 7;
+      particles.push({
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2,
+        size: 4 + Math.random() * 5,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * 360,
+        rotSpeed: (Math.random() - 0.5) * 12,
+        life: 0,
+        maxLife: 90 + Math.random() * 40
+      });
+    }
+    if (!animId) animate();
+  }
+
+  function animate(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+      p.vy += 0.12;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rotation += p.rotSpeed;
+      p.life++;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate((p.rotation * Math.PI) / 180);
+      ctx.globalAlpha = Math.max(0, 1 - p.life / p.maxLife);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+      ctx.restore();
+    });
+
+    particles = particles.filter(p => p.life < p.maxLife);
+
+    if (particles.length > 0){
+      animId = requestAnimationFrame(animate);
+    } else {
+      animId = null;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  }
+</script>
+
+</body>
+</html>
